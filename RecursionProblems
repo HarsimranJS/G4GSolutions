@@ -1,0 +1,117 @@
+Question: Sum of Digits of a Number
+Solution: public static int sumOfDigits(int n)
+        {
+            int curr = n%10;
+            if(n/10==0)
+                return n;
+            return curr+sumOfDigits(n/10);
+        }
+
+Question: Count Total Digits in a Number
+Solution: public static int countDigits(int n)
+        {
+            if(n/10==0)
+                return 1;
+            return 1+countDigits(n/10);
+        }   
+
+Question: Find the digital root of Number
+Solution: public static int digitalRoot(int n)
+        {
+            int curr=0,temp=0;
+            if(n/10==0)
+                return n;
+            while(n!=0)
+            {
+                temp=n%10;
+                curr+=temp;
+                n=n/10;
+            }
+            return digitalRoot(curr);
+        }
+
+Question: Fibonacci Using Recursion
+Solution: static long fibonacci(int n)
+        {
+            if(n==0)
+                return 0;
+            if(n==1)
+                return 1;
+            return fibonacci(n-1)+fibonacci(n-2);
+        }
+
+Question: Power Using Recursion
+Solution: static int RecursivePower(int n,int p)
+        {
+            if(p==1)
+                return n;
+            return n*RecursivePower(n,p-1);
+        }
+
+Question: Given a number N, let the reverse of the number be R. The task is to print the output of the Expression power(N,R)
+Solution: long power(int N,int R)
+        {    
+            if(R==0)
+                return 1;
+            else
+                return (N*power(N,R-1))%1000000007;
+        }
+
+Question: Return all the subsequences of a string
+Solution: static ArrayList<String> powerSet(String s)
+        {
+            if(s.length()==0)
+            {
+                ArrayList<String> y = new ArrayList<String>(1);
+                y.add("");
+                return y;
+            }
+        
+            ArrayList<String> small= powerSet(s.substring(1));
+            ArrayList<String> ans = new ArrayList<>(2*small.size());
+        
+            for(int i=0;i<small.size();i++)
+                ans.add(small.get(i));
+
+            for(int i=0;i<small.size();i++)
+                ans.add(s.charAt(0)+small.get(i));
+
+            return ans;
+        }
+
+Question: Possible words from phone digits?
+Solution: static void possibleWords(int a[], int N)
+        {
+            HashMap<Integer, String> hm = new HashMap<Integer, String>(); 
+
+            hm.put(2, "abc"); 
+            hm.put(3, "def"); 
+            hm.put(4, "ghi"); 
+            hm.put(5, "jkl"); 
+            hm.put(6, "mno"); 
+            hm.put(7, "pqrs"); 
+            hm.put(8, "tuv"); 
+            hm.put(9, "wxyz"); 
+            hm.put(1, "1"); 
+            hm.put(0, "0");
+        
+            StringBuilder str = new StringBuilder();
+            printString(a,0,hm,str);
+        }
+    
+          static void printString(int arr[],int i,HashMap<Integer,String> hm,StringBuilder str)
+        {
+            if(i==arr.length)
+            {
+                System.out.print(str+" ");
+                return;
+            }
+        
+            String valCheck=hm.get(arr[i]);
+            for(int j=0;j<valCheck.length();j++)
+            {
+                str.append(valCheck.charAt(j));
+                printString(arr,i+1,hm,str);
+                str.deleteCharAt(str.length()-1);
+            }
+        }
